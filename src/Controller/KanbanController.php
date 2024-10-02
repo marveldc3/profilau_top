@@ -8,11 +8,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class KanbanController extends AbstractController
 {
-    #[Route('/kanban', name: 'app_kanban')]
+    #[Route('/kanban', name: 'kanban_index', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('kanban/index.html.twig', [
-            'controller_name' => 'KanbanController',
-        ]);
+        return $this->render('kanban/index.html.twig');
     }
 }

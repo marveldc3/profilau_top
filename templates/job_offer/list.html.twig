@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres d'emploi{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des offres d'emploi</h1>
+        <a href="{{ path('job_offer_new') }}" class="btn btn-primary mb-3">Ajouter une offre</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Entreprise</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jobOffer in jobOffers %}
+                    <tr>
+                        <td>{{ jobOffer.title }}</td>
+                        <td>{{ jobOffer.company }}</td>
+                        <td>{{ jobOffer.status }}</td>
+                        <td>
+                            <a href="{{ path('job_offer_show', {id: jobOffer.id}) }}" class="btn btn-info">Voir</a>
+                            <a href="{{ path('job_offer_edit', {id: jobOffer.id}) }}" class="btn btn-warning">Modifier</a>
+                            <form action="{{ path('job_offer_delete', {id: jobOffer.id}) }}" method="post" style="display:inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ jobOffer.id) }}">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'offre d'emploi{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ jobOffer.title }}</h1>
+        <p><strong>Entreprise:</strong> {{ jobOffer.company }}</p>
+        <p><strong>Lien:</strong> {{ jobOffer.link }}</p>
+        <p><strong>Lieu:</strong> {{ jobOffer.location }}</p>
+        <p><strong>Salaire:</strong> {{ jobOffer.salary }}</p>
+        <p><strong>Contact:</strong> {{ jobOffer.contactPerson }}</p>
+        <p><strong>Email de contact:</strong> {{ jobOffer.contactEmail }}</p>
+        <p><strong>Date de candidature:</strong> {{ jobOffer.applicationDate|date('Y-m-d') }}</p>
+        <p><strong>Statut:</strong> {{ jobOffer.status }}</p>
+        <a href="{{ path('job_offer_edit', {id: jobOffer.id}) }}" class="btn btn-warning">Modifier</a>
+        <form action="{{ path('job_offer_delete', {id: jobOffer.id}) }}" method="post" style="display:inline;">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ jobOffer.id) }}">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+{% endblock %}
